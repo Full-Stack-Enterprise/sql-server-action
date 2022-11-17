@@ -32,7 +32,7 @@ export default async function run() {
     
         const sqlText = fs.readFileSync(inputs.sqlFile, "utf-8");
 
-        const sqlCommands = sqlText.toLowerCase().split("\ngo")
+        const sqlCommands = sqlText.toLowerCase().split("go")
 
         const pool = await sql.connect(sqlConfig)
 
@@ -48,7 +48,7 @@ export default async function run() {
             })
 
             new sql.Request(transaction)
-                .batch(sqlCommands, (err, result) => {
+                .batch([sqlCommands[0]], (err, result) => {
                     // insert should fail because of invalid value
                     console.log(err)
                     console.log(result)
