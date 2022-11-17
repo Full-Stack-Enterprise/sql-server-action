@@ -1,17 +1,11 @@
 import * as core from "@actions/core";
-import * as crypto from "crypto";
 import * as path from 'path';
-import { AuthorizerFactory } from "azure-actions-webclient/AuthorizerFactory";
 
-import AzureSqlAction, { IActionInputs, ISqlActionInputs, IDacpacActionInputs, IBuildAndPublishInputs, ActionType, SqlPackageAction } from "./AzureSqlAction";
-import AzureSqlResourceManager from './AzureSqlResourceManager'
-import FirewallManager from "./FirewallManager";
+import { IActionInputs, ISqlActionInputs, IDacpacActionInputs, IBuildAndPublishInputs, ActionType, SqlPackageAction } from "./AzureSqlAction";
 import AzureSqlActionHelper from "./AzureSqlActionHelper";
 import SqlConnectionStringBuilder from "./SqlConnectionStringBuilder";
-import SqlUtils from "./SqlUtils";
 import Constants from "./Constants";
 import sql from 'mssql'
-import axios from 'axios'
 import fs from 'fs'
 
 export default async function run() {
