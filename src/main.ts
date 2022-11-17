@@ -31,15 +31,11 @@ export default async function run() {
           }
     
         const sqlText = fs.readFileSync(inputs.sqlFile, "utf-8");
-        const sqlFiles = [sqlText, sqlText, sqlText]
-        
-        let concatSql = ''
-        sqlFiles.forEach(sqlFile => {
-            concatSql = concatSql.concat(sqlFile)
-        })
 
         const pool = await sql.connect(sqlConfig)
+
         const transaction = new sql.Transaction(pool)
+        
         transaction.begin(err => {
             // ... error checks
             let rolledBack = false
@@ -50,7 +46,7 @@ export default async function run() {
             })
 
             new sql.Request(transaction)
-                .batch(concatSql, (err, result) => {
+                .batch(sqlText, (err, result) => {
                     // insert should fail because of invalid value
                     console.log(err)
                     console.log(result)
